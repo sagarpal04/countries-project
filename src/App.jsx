@@ -1,12 +1,13 @@
 import React from "react";
 import Header from "./Header";
-import Hero from "./Hero";
+import { ThemeProvider } from "./ThemeContext"; // Adjust the path if necessary
+import { Outlet, Link } from "react-router-dom";
 const App = () => {
   return (
-    <>
+    <ThemeProvider>
       <Header />
-      <Hero />
-    </>
+      <Outlet />
+    </ThemeProvider>
   );
 };
 

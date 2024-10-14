@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import MenuBox from "./MenuBox";
 import Card from "./Card";
+import { useTheme } from "./ThemeContext";
 
 const Hero = () => {
+  const { isDarkMode, setDarkMode } = useTheme();
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [selectedRegion, setSelectedRegion] = useState("");
@@ -58,22 +60,15 @@ const Hero = () => {
   }, [searchQuery, countries]);
 
   return (
-    <div className="bg-gray-100">
+    <div className={isDarkMode ? "bg-gray-700" : "bg-gray-100"}>
       <div className="w-9/12 mx-auto py-10 flex items-center justify-between">
         <SearchBar setSearchQuery={setSearchQuery} />{" "}
         {/* Pass setSearchQuery */}
         <MenuBox setSelectedRegion={setSelectedRegion} />{" "}
       </div>
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {filteredCountries.map((el) => (
-          <Card
-            key={el.cca3}
-            countryName={el.name.official}
-            image={el.flags.svg}
-            region={el.region}
-            capital={el.capital && el.capital[0]}
-            population={el.population}
-          />
+          <Card key={el.cca3} data={el} />
         ))}
       </div>
     </div>

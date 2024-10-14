@@ -1,18 +1,20 @@
-import { useState } from "react";
-
+import { Link } from "react-router-dom";
+import { useTheme } from "./ThemeContext"; // Adjust the path if necessary
 const Header = () => {
-  const [isDarkMode, setDarkMode] = useState(false);
+  const { isDarkMode, setDarkMode } = useTheme();
 
   const handleDarkMode = () => {
     setDarkMode((prev) => !prev);
   };
 
   return (
-    <div className="shadow-md">
+    <div className="shadow-xl rounded-md">
       <div className="w-9/12 flex justify-between mx-auto py-8">
-        <h1 className="font-bold text-2xl text-pink-500">
-          Where in the world?
-        </h1>
+        <Link to="/">
+          <h1 className="font-bold text-2xl text-pink-500">
+            Where in the world?
+          </h1>
+        </Link>
         <div
           onClick={handleDarkMode}
           className="flex gap-2 items-center cursor-pointer"
